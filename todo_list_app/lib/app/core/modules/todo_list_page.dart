@@ -19,7 +19,7 @@ class TodoListPage extends StatelessWidget {
       providers: _bindings ??
           [
             Provider(
-              create: (context) => Object(),
+              create: (_) => Object(),
             ),
           ],
       child: Builder(

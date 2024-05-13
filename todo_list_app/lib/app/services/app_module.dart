@@ -22,18 +22,14 @@ class _AppModuleState extends State<AppModule> {
       providers: [
         Provider(create: (_) => FirebaseAuth.instance),
         Provider(
-          create: (context) => SqliteConnectionFactory(),
+          create: (_) => SqliteConnectionFactory(),
           lazy: false,
         ),
         Provider<UserRepository>(
-          create: (context) => UserRepositoryImpl(
-            firebaseAuth: context.read(),
-          ),
+          create: (context) => UserRepositoryImpl(firebaseAuth: context.read()),
         ),
         Provider<UserService>(
-          create: (context) => UserServiceImpl(
-            userRepository: context.read(),
-          ),
+          create: (context) => UserServiceImpl(userRepository: context.read()),
         )
       ],
       child: const AppWidget(),

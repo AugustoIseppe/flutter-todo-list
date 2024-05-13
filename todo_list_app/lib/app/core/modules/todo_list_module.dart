@@ -19,8 +19,8 @@ abstract class TodoListModule {
       (key, pageBuilder) => MapEntry(
         key,
         (_) => TodoListPage(
-          page: pageBuilder,
           bindings: _bindings,
+          page: pageBuilder,
         ),
       ),
     );

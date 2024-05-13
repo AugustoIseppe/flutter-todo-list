@@ -29,10 +29,11 @@ class _AppWidgetState extends State<AppWidget> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Todo List Provider",
+      initialRoute: '/login',
       routes: {
         ...AuthModule().routers
       },
-      home: const LoginPage(),
+      // home: const LoginPage(),
     );
   }
 }
