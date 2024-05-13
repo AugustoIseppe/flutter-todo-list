@@ -70,7 +70,26 @@ class UserRepositoryImpl implements UserRepository {
   
   @override
   Future<User?> googleLogin() async {
-    final googleSignIn = GoogleSignIn();
-    final googleUser = await googleSignIn.signIn(); 
+    try {
+  final googleSignIn = GoogleSignIn();
+  final googleUser = await googleSignIn.signIn();
+  final googleAuth = await googleUser?.authentication;
+  final  firebaseCredential = GoogleAuthProvider.credential(
+    accessToken: googleAuth!.accessToken,
+    idToken: googleAuth.idToken
+  );
+  var userCredential = await _firebaseAuth.signInWithCredential(firebaseCredential);
+  return userCredential.user;
+} on FirebaseAuthException catch (e, s) {
+  print(e);
+  print(s);
+  throw AuthException(message: 'Erro ao realizar login');
+}
+  }
+  
+  @override
+  Future<User?> googleLogout() async {
+    await GoogleSignIn().signOut();
+    _firebaseAuth.signOut();
   }
 }
