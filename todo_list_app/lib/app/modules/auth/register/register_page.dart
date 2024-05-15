@@ -4,7 +4,6 @@ import 'package:todo_list_app/app/core/notifier/default_listener_notifier.dart';
 import 'package:todo_list_app/app/core/validators/validators.dart';
 import 'package:todo_list_app/app/core/widget/todo_list_field.dart';
 import 'package:todo_list_app/app/core/widget/todo_list_logo.dart';
-import 'package:todo_list_app/app/modules/auth/login/login_page.dart';
 import 'package:validatorless/validatorless.dart';
 import 'package:todo_list_app/app/modules/auth/register/register_controller.dart';
 

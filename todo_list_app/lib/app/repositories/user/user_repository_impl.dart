@@ -32,6 +32,7 @@ class UserRepositoryImpl implements UserRepository {
       //   throw AuthException(message: e.message ?? 'Errro ao registar usuário');
       // }
     }
+    return null;
   }
 
   @override
@@ -87,10 +88,10 @@ class UserRepositoryImpl implements UserRepository {
 }
   }
   
-  @override
   Future<User?> googleLogout() async {
     await GoogleSignIn().signOut();
     _firebaseAuth.signOut();
+    return null;
   }
   
   @override

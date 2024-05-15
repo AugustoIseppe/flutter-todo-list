@@ -31,7 +31,6 @@ class _AppWidgetState extends State<AppWidget> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Todo List Provider",
-      // initialRoute: '/login',
       navigatorKey: TodoListNavigator.navigatorKey,
       routes: {
         ...AuthModule().routers,

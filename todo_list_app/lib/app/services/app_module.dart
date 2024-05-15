@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list_app/app/core/auth/auth_meu_provider.dart';
 import 'package:todo_list_app/app/core/database/sqlit_connection_factory.dart';
 import 'package:todo_list_app/app/repositories/user/user_repository.dart';
 import 'package:todo_list_app/app/repositories/user/user_repository_impl.dart';
@@ -30,6 +31,13 @@ class _AppModuleState extends State<AppModule> {
         ),
         Provider<UserService>(
           create: (context) => UserServiceImpl(userRepository: context.read()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AuthMeuProvider(
+            firebaseAuth: context.read(),
+            userService: context.read(),
+          )..loadListener(),
+          lazy: false,
         )
       ],
       child: const AppWidget(),
