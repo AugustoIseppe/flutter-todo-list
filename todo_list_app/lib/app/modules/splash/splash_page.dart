@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list_app/app/core/widget/todo_list_logo.dart';
 
 class SplashPage extends StatefulWidget {
 
@@ -12,9 +13,13 @@ class _SplashPageState extends State<SplashPage> {
 
    @override
    Widget build(BuildContext context) {
-       return Scaffold(
-           appBar: AppBar(title: const Text(''),),
-           body: const Center(child: Text('Hello'))
+       return const Scaffold(
+           body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+               Center(child: TodoListLogo()),
+             ],
+           )
        );
   }
 }
