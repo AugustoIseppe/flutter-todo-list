@@ -105,7 +105,7 @@ class UserRepositoryImpl implements UserRepository {
     final user = _firebaseAuth.currentUser; //método para pegar o usuário logado
     if(user != null) {
       await user.updateDisplayName(name); //altera o nome do usuário
-      user.reload(); 
+      user.reload();
     }
   }
 }

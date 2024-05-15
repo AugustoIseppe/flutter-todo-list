@@ -7,11 +7,17 @@ import 'package:todo_list_app/app/core/auth/auth_meu_provider.dart';
 import 'package:todo_list_app/app/core/ui/messages.dart';
 import 'package:todo_list_app/app/services/user/user_service.dart';
 
-class HomeDrawer extends StatelessWidget {
+class HomeDrawer extends StatefulWidget {
 
-  final nameVN = ValueNotifier<String>('');
 
   HomeDrawer({super.key});
+
+  @override
+  State<HomeDrawer> createState() => _HomeDrawerState();
+}
+
+class _HomeDrawerState extends State<HomeDrawer> {
+  final nameVN = ValueNotifier<String>('');
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +41,7 @@ class HomeDrawer extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Selector<AuthMeuProvider, String>(selector: (context, authMeuProvider) {
                       return authMeuProvider.user?.displayName ?? 'Não informado';
-                    }, builder: (context, value, child) {
+                    }, builder: (_, value, __) {
                       return Text(value);
                     },),
                   ),
