@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todolist_app_v2/pages/home_page.dart';
 import 'package:todolist_app_v2/pages/login_page.dart';
+import 'package:todolist_app_v2/pages/register_page.dart';
+import 'package:todolist_app_v2/pages/splash_page.dart';
 import 'package:todolist_app_v2/utils/app_routes.dart';
 
 void main() {
@@ -20,9 +22,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const LoginPage(),
-      initialRoute: '/login_page',
+      initialRoute: '/splash_page',
       routes: {
+        AppRoutes.splashPage: (context) => const SplashPage(),
         AppRoutes.loginPage: (context) => const LoginPage(),
+        AppRoutes.registerPage: (context) => const RegisterPage(),
         AppRoutes.homePage: (context) => const HomePage(),
       },
     );
