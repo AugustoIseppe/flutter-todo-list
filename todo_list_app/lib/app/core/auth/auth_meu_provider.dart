@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list_app/app/core/navigator/todo_list_navigator.dart';
-import 'package:todo_list_app/app/modules/home/home_page.dart';
 import 'package:todo_list_app/app/services/user/user_service.dart';
 
 class AuthMeuProvider extends ChangeNotifier {
