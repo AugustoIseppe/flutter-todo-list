@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:todolist_app_v2/widgets/form_login.dart';
+import 'package:todolist_app_v2/widgets/navigator_button.dart';
 import 'package:validatorless/validatorless.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
@@ -19,26 +21,25 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: ClipOval(
-              child: Container(
-                color: Colors.grey.shade200,
-                child: const Center(
-                    child: Padding(
-                  padding: EdgeInsets.only(right: 2.0),
-                  child: Icon(
-                    Icons.arrow_left_outlined,
-                    size: 25,
-                    color: Colors.black,
-                  ),
-                )),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Center(
+            child: Padding(
+              padding: EdgeInsets.only(right: 2.0),
+              child: Icon(
+                Ionicons.return_up_back_outline,
+                size: 25,
+                color: Colors.black,
               ),
-            )),
+            ),
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -83,9 +84,8 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(
             height: 20,
           ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+          SizedBox(
+            width: 300,
             child: Form(
               key: _formKey,
               child: Column(
@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(width: 150, height: 0.1, color: Colors.black),
+              Container(width: 160, height: 0.1, color: Colors.black),
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Text(
@@ -131,18 +131,73 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(fontSize: 10, color: Colors.grey.shade500),
                 ),
               ),
-              Container(width: 150, height: 0.2, color: Colors.black),
+              Container(width: 160, height: 0.2, color: Colors.black),
             ],
           ),
-          SignInButton(
-            Buttons.Google,
-            onPressed: () {},
-            text: 'Continue com o Google',
-            padding: const EdgeInsets.all(10),
-            shape: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide.none),
+          const SizedBox(
+            height: 20,
           ),
+          SizedBox(
+            width: 300,
+            child: SignInButton(
+              Buttons.Google,
+              onPressed: () {},
+              text: 'Continue com o Google..',
+              padding: const EdgeInsets.all(10),
+              elevation: 5,
+              shape: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide.none),
+            ),
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Não tem uma conta?',
+                      style: GoogleFonts.lato(
+                        textStyle: const TextStyle(
+                          color: Colors.blue,
+                          letterSpacing: .5,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 3,
+                    ),
+                    Text(
+                      'Cadastre-se!',
+                      style: GoogleFonts.lato(
+                        textStyle: const TextStyle(
+                          color: Colors.black,
+                          letterSpacing: .5,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                      height: 3,
+                    ),
+                const NavigatorButton(
+                    title: 'Login',
+                    page: '/home_page',
+                    colorTextStyle: Colors.white,
+                    backgroundColorButton: Colors.black)
+              ],
+            ),
+          )
         ],
       ),
     );
