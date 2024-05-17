@@ -41,164 +41,171 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 28.0, top: 100),
-            child: Column(
-              children: [
-                Text(
-                  'Lets Sign you in. ',
-                  style: GoogleFonts.lato(
-                    textStyle: const TextStyle(
-                      color: Colors.blue,
-                      letterSpacing: .5,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                Text(
-                  'Welcome Back. ',
-                  style: GoogleFonts.lato(
-                    textStyle: const TextStyle(
-                      color: Colors.blue,
-                      letterSpacing: .5,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-                Text(
-                  'Youve been missed. ',
-                  style: GoogleFonts.lato(
-                    textStyle: const TextStyle(
-                      color: Colors.blue,
-                      letterSpacing: .5,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: 300,
-            child: Form(
-              key: _formKey,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 28.0, top: 100),
               child: Column(
                 children: [
-                  FormLogin(
-                    controller: _emailController,
-                    labelText: 'Nome de Usuário ou E-mail',
-                    validator: Validatorless.multiple([
-                      Validatorless.required('E-mail obrigatório'),
-                      Validatorless.email('E-mail inválido')
-                    ]),
+                  Text(
+                    'Lets Sign you in. ',
+                    style: GoogleFonts.lato(
+                      textStyle: const TextStyle(
+                        color: Colors.blue,
+                        letterSpacing: .5,
+                        fontSize: 35,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                  Text(
+                    'Welcome Back. ',
+                    style: GoogleFonts.lato(
+                      textStyle: const TextStyle(
+                        color: Colors.blue,
+                        letterSpacing: .5,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
-                  FormLogin(
-                    controller: _passwordController,
-                    labelText: 'Senha',
-                    validator: Validatorless.multiple(
-                      [
-                        Validatorless.required('Senha obrigatória'),
-                        Validatorless.min(
-                            6, 'A senha deve ter no mínimo 6 caracteres')
-                      ],
+                  Text(
+                    'Youve been missed. ',
+                    style: GoogleFonts.lato(
+                      textStyle: const TextStyle(
+                        color: Colors.blue,
+                        letterSpacing: .5,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(width: 160, height: 0.1, color: Colors.black),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Text(
-                  'ou',
-                  style: TextStyle(fontSize: 10, color: Colors.grey.shade500),
-                ),
-              ),
-              Container(width: 160, height: 0.2, color: Colors.black),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: 300,
-            child: SignInButton(
-              Buttons.Google,
-              onPressed: () {},
-              text: 'Continue com o Google..',
-              padding: const EdgeInsets.all(10),
-              elevation: 5,
-              shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none),
+            const SizedBox(
+              height: 20,
             ),
-          ),
-          const SizedBox(
-            height: 100,
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+            SizedBox(
+              width: 320,
+              child: Form(
+                key: _formKey,
+                child: Column(
                   children: [
-                    Text(
-                      'Não tem uma conta?',
-                      style: GoogleFonts.lato(
-                        textStyle: const TextStyle(
-                          color: Colors.blue,
-                          letterSpacing: .5,
-                          fontSize: 10,
-                        ),
-                      ),
+                    FormLogin(
+                      controller: _emailController,
+                      labelText: 'Nome de Usuário ou E-mail',
+                      validator: Validatorless.multiple([
+                        Validatorless.required('E-mail obrigatório'),
+                        Validatorless.email('E-mail inválido')
+                      ]),
                     ),
                     const SizedBox(
-                      width: 3,
+                      height: 10,
                     ),
-                    Text(
-                      'Cadastre-se!',
-                      style: GoogleFonts.lato(
-                        textStyle: const TextStyle(
-                          color: Colors.black,
-                          letterSpacing: .5,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w900,
-                        ),
+                    FormLogin(
+                      controller: _passwordController,
+                      labelText: 'Senha',
+                      validator: Validatorless.multiple(
+                        [
+                          Validatorless.required('Senha obrigatória'),
+                          Validatorless.min(
+                              6, 'A senha deve ter no mínimo 6 caracteres')
+                        ],
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(
-                      height: 3,
-                    ),
-                const NavigatorButton(
-                    title: 'Login',
-                    page: '/home_page',
-                    colorTextStyle: Colors.white,
-                    backgroundColorButton: Colors.black)
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(width: 160, height: 0.1, color: Colors.black),
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    'ou',
+                    style: TextStyle(fontSize: 10, color: Colors.grey.shade500),
+                  ),
+                ),
+                Container(width: 160, height: 0.2, color: Colors.black),
               ],
             ),
-          )
-        ],
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: 320,
+              height: 60,
+              child: SignInButton(
+                Buttons.Google,
+                onPressed: () {},
+                text: 'Continue com o Google..',
+                padding: const EdgeInsets.all(10),
+                elevation: 5,
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide.none),
+              ),
+            ),
+            const SizedBox(
+              height: 100,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Não tem uma conta?',
+                        style: GoogleFonts.lato(
+                          textStyle: const TextStyle(
+                            color: Colors.blue,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 3,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/register_page');
+                        },
+                        child: Text(
+                          'Cadastre-se!',
+                          style: GoogleFonts.lato(
+                            textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                        height: 10,
+                      ),
+                  NavigatorButton(
+                      title: 'Login',
+                      page: '/home_page',
+                      colorTextStyle: Colors.white,
+                      backgroundColorButton: Colors.black)
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

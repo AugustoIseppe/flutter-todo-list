@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:todolist_app_v2/widgets/message_home_page.dart';
 import 'package:todolist_app_v2/widgets/navigator_button.dart';
@@ -11,6 +13,8 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,22 +25,24 @@ class _SplashPageState extends State<SplashPage> {
           children: [
             const TodoListLogoV2(),
             const MessageHomePage(),
-            const SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             Column(
               children: [
                 const NavigatorButton(
-                  title: 'Login',
-                  page: '/login_page',
-                  colorTextStyle: Colors.white,
-                  backgroundColorButton: Colors.black
+                    title: 'Login',
+                    page: '/login_page',
+                    colorTextStyle: Colors.white,
+                    backgroundColorButton: Colors.black),
+                const SizedBox(
+                  height: 8,
                 ),
-                const SizedBox(height: 8,),
-                NavigatorButton(
-                  title: 'Register',
-                  page: '/register_page',
-                  colorTextStyle: Colors.black,
-                  backgroundColorButton: Colors.grey.shade400
-                ),
+                 NavigatorButton(
+                        title: 'Register',
+                        page: '/register_page',
+                        colorTextStyle: Colors.black,
+                        backgroundColorButton: Colors.grey.shade400),
               ],
             ),
           ],

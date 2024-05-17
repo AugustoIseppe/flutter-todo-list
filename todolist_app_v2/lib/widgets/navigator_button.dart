@@ -17,10 +17,10 @@ class NavigatorButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
-      width: 300,
+      height: 60,
+      width: 320,
       child: TextButton(
-        onPressed: () {
+        onPressed: () async {
           Navigator.of(context).pushNamed(page);
         },
         style: TextButton.styleFrom(

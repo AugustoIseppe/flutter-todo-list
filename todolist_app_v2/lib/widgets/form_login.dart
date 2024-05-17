@@ -23,8 +23,9 @@ class FormLogin extends StatelessWidget {
       controller: controller,
       validator: validator,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.all(20),
         labelText: labelText,
-        labelStyle: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+        labelStyle: TextStyle(fontSize: 15, color: Colors.grey.shade500,),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),
         ),
