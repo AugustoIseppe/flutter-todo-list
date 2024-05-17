@@ -1,16 +1,15 @@
-
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as path;
 
 class DbUtil {
+  static const version = 1;
+  static const dataBaseName = 'todoListApp';
 
-static const version = 1;
-  static const dataBaseName = 'TODO_LIST_PROVIDER';
-
-  Future<Database> database() async {
+  Future<Database> openConnection() async {
     final dbPath = await getDatabasesPath();
-    final database  = openDatabase(
-      path.join(dbPath, "todolistapp.db"),
+    String databaseFinalPath = path.join(dbPath, dataBaseName);
+    final database = openDatabase(
+      databaseFinalPath,
       onCreate: (db, version) {
         db.execute('''
   CREATE TABLE todo(
@@ -22,6 +21,27 @@ static const version = 1;
 ''');
       },
     );
-      return database;
+    return database;
   }
+
+
+  /* método para inserir os dados no sqflite */
+  Future<void> insert(String table, Map<String, dynamic> data) async {
+    final database = await DbUtil().openConnection();
+    await database.insert(table, data);
+  }
+
+  /* método para obter os dados no sqflite */
+    Future<List<Map<String, dynamic>>> getData(String table) async {
+    final database = await DbUtil().openConnection();
+    final responseTable = database.query(table);
+    return responseTable;
+  }
+
+  /* método para deletar os dados no sqflite */
+  Future<int> delete(String id) async {
+    final database = await DbUtil().openConnection();
+    return database.delete('table', where: 'id=?', whereArgs: [id]);
+  }
+
 }
