@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:todolist_app_v2/widgets/message_home_page.dart';
-import 'package:todolist_app_v2/widgets/navigator_button.dart';
 import 'package:todolist_app_v2/widgets/todo_list_logo_v2.dart';
 
 class SplashPage extends StatefulWidget {
@@ -30,19 +27,29 @@ class _SplashPageState extends State<SplashPage> {
             ),
             Column(
               children: [
-                const NavigatorButton(
-                    title: 'Login',
-                    page: '/login_page',
-                    colorTextStyle: Colors.white,
-                    backgroundColorButton: Colors.black),
-                const SizedBox(
-                  height: 8,
+                TextButton(
+                  child: const Text('Login', style: TextStyle(color: Colors.white),),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    fixedSize: Size(300, 50)
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/login_page');
+                  },
                 ),
-                 NavigatorButton(
-                        title: 'Register',
-                        page: '/register_page',
-                        colorTextStyle: Colors.black,
-                        backgroundColorButton: Colors.grey.shade400),
+                const SizedBox(
+                  height: 4,
+                ),
+                 TextButton(
+                  child: const Text('Registrar', style: TextStyle(color: Colors.black),),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.grey[300],
+                    fixedSize: Size(300, 50)
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/register_page');
+                  },
+                ),
               ],
             ),
           ],

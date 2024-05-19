@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:todolist_app_v2/models/auth.dart';
 import 'package:todolist_app_v2/widgets/form_login.dart';
-import 'package:todolist_app_v2/widgets/navigator_button.dart';
 import 'package:todolist_app_v2/widgets/todo_list_logo_v2.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -93,12 +93,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(
                         height: 100,
                       ),
-                      NavigatorButton(
-                        title: 'Cadastrar',
-                        page: '/login_page',
-                        colorTextStyle: Colors.white,
-                        backgroundColorButton: Colors.black,
-                      ),
+                       TextButton(
+                        style: TextButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    fixedSize: const Size(300, 50)
+                  ),
+                    child: const Text('Cadastrar', style: TextStyle(color: Colors.white),),
+                    onPressed: () {
+                      final formIsValid = _formKey.currentState?.validate() ?? false;
+                      if (formIsValid) {
+                        final auth = Auth();
+                        auth.createUserWithEmailAndPassword(_emailRegisterController.text, _passwordRegisterController.text);
+                      }
+                    },
+                  ),
                       const SizedBox(
                         height: 20,
                       ),

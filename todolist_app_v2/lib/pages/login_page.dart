@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:todolist_app_v2/models/auth.dart';
 import 'package:todolist_app_v2/widgets/form_login.dart';
-import 'package:todolist_app_v2/widgets/navigator_button.dart';
 import 'package:validatorless/validatorless.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     FormLogin(
                       controller: _emailController,
-                      labelText: 'Nome de Usuário ou E-mail',
+                      labelText: 'E-mail',
                       validator: Validatorless.multiple([
                         Validatorless.required('E-mail obrigatório'),
                         Validatorless.email('E-mail inválido')
@@ -196,11 +196,22 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                         height: 10,
                       ),
-                  NavigatorButton(
-                      title: 'Login',
-                      page: '/home_page',
-                      colorTextStyle: Colors.white,
-                      backgroundColorButton: Colors.black)
+                  TextButton(
+                    style: TextButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    fixedSize: const Size(300, 50)
+                  ),
+                    onPressed: () {
+                      final formIsValid = _formKey.currentState?.validate() ?? false;
+                      if (formIsValid) {
+                        final email = _emailController.text;
+                        final password = _passwordController.text;
+                        final auth = Auth();
+                        auth.signInWithEmailAndPassword(email, password);
+                      }
+                    },
+                    child: const Text('Login', style: TextStyle(color: Colors.white),),
+                  ),
                 ],
               ),
             )
