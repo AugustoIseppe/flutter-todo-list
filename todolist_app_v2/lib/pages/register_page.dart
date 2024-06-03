@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:todolist_app_v2/models/auth.dart';
 import 'package:todolist_app_v2/widgets/form_login.dart';
 import 'package:todolist_app_v2/widgets/todo_list_logo_v2.dart';
@@ -17,6 +18,13 @@ class _RegisterPageState extends State<RegisterPage> {
   final _emailRegisterController = TextEditingController();
   final _passwordRegisterController = TextEditingController();
   final _confirmPasswordRegisterController = TextEditingController();
+
+  // Future<void> teste() async {
+  //   await Future.delayed(Duration(seconds: 2));
+  //   final provider = Provider.of<Auth>(context, listen: false);
+  //   // final userToken = await provider.;
+  //    print("TOKEN RETORNADO DA REGISTERPAGE: ${userToken}");
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +55,9 @@ class _RegisterPageState extends State<RegisterPage> {
             // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const TodoListLogoV2(),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               SizedBox(
                 width: 300,
                 child: Form(
@@ -91,22 +101,57 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                       const SizedBox(
-                        height: 100,
+                        height: 10,
                       ),
-                       TextButton(
+                      TextButton(
                         style: TextButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    fixedSize: const Size(300, 50)
-                  ),
-                    child: const Text('Cadastrar', style: TextStyle(color: Colors.white),),
-                    onPressed: () {
-                      final formIsValid = _formKey.currentState?.validate() ?? false;
-                      if (formIsValid) {
-                        final auth = Auth();
-                        auth.createUserWithEmailAndPassword(_emailRegisterController.text, _passwordRegisterController.text);
-                      }
-                    },
-                  ),
+                            backgroundColor: Colors.black,
+                            fixedSize: const Size(300, 50)),
+                        child: const Text(
+                          'Cadastrar',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () async {
+                          final formIsValid =
+                              _formKey.currentState?.validate() ?? false;
+                          if (formIsValid) {
+                            try {
+                              final auth =
+                                  Provider.of<Auth>(context, listen: false);
+                              auth.signUpWithEmailPassword(
+                                  _emailRegisterController.text,
+                                  _passwordRegisterController.text);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                      "Cadastro realizado com sucesso"),
+                                ),
+                              );
+                            } catch (error) {
+                              if (context.mounted) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title:
+                                          const Text("Erro ao realizar login"),
+                                      content: Text(error.toString()),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Ok'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+                            }
+                          }
+                        },
+                      ),
                       const SizedBox(
                         height: 20,
                       ),

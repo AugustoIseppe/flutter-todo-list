@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:todolist_app_v2/models/auth.dart';
+import 'package:todolist_app_v2/utils/app_routes.dart';
 import 'package:todolist_app_v2/widgets/form_login.dart';
+import 'package:todolist_app_v2/widgets/loading_page.dart';
 import 'package:validatorless/validatorless.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
@@ -18,6 +21,8 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -143,8 +148,52 @@ class _LoginPageState extends State<LoginPage> {
               height: 60,
               child: SignInButton(
                 Buttons.Google,
-                onPressed: () {},
-                text: 'Continue com o Google..',
+                onPressed: () async {
+                  setState(() {
+                    _isLoading = true;
+                  });
+                  try {
+                    final auth = Provider.of<Auth>(context, listen: false);
+                    await auth.googleLogin();
+                    if (context.mounted) {
+                      Navigator.of(context)
+                          .pushReplacementNamed(AppRoutes.homePage);
+                    }
+                    // Navigator.of(context)
+                    // .pushReplacementNamed(AppRoutes.homePage);
+                  } catch (error) {
+                    if (context.mounted) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text("Erro ao realizar login"),
+                            content: Text(error.toString()),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text('Ok'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   SnackBar(
+                    //     content: Text(
+                    //         "Erro ao realizar login: ${e.toString()}"),
+                    //   ),
+                    // );
+                  }
+                  setState(() {
+                    _isLoading = false;
+                  });
+                },
+                text: 'Continuar com Google',
                 padding: const EdgeInsets.all(10),
                 elevation: 5,
                 shape: OutlineInputBorder(
@@ -152,6 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderSide: BorderSide.none),
               ),
             ),
+            // if (_isLoading) const LoadingPage(),
             const SizedBox(
               height: 100,
             ),
@@ -194,24 +244,72 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   const SizedBox(
-                        height: 10,
-                      ),
+                    height: 10,
+                  ),
                   TextButton(
                     style: TextButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    fixedSize: const Size(300, 50)
-                  ),
-                    onPressed: () {
-                      final formIsValid = _formKey.currentState?.validate() ?? false;
+                        backgroundColor: Colors.black,
+                        fixedSize: const Size(300, 50)),
+                    onPressed: () async {
+                      setState(() {
+                        _isLoading = true;
+                      });
+                      final formIsValid =
+                          _formKey.currentState?.validate() ?? false;
                       if (formIsValid) {
                         final email = _emailController.text;
                         final password = _passwordController.text;
-                        final auth = Auth();
-                        auth.signInWithEmailAndPassword(email, password);
+                        final auth = Provider.of<Auth>(context, listen: false);
+                        try {
+                          final success = await auth.signInWithEmailAndPassword(
+                              email, password);
+
+                          if (success && mounted) {
+                            // Navegar para a próxima página após login bem-sucedido
+                            if (context.mounted) {
+                              Navigator.of(context)
+                                  .pushReplacementNamed(AppRoutes.homePage);
+                            }
+                          }
+                        } catch (error) {
+                          if (context.mounted) {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text("Erro ao realizar login"),
+                                  content: Text(error.toString()),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('Ok'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   SnackBar(
+                          //     content: Text(
+                          //         "Erro ao realizar login: ${e.toString()}"),
+                          //   ),
+                          // );
+                        }
                       }
+                      setState(() {
+                        _isLoading = false;
+                      });
                     },
-                    child: const Text('Login', style: TextStyle(color: Colors.white),),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
+                  if (_isLoading) const LoadingPage(),
                 ],
               ),
             )
