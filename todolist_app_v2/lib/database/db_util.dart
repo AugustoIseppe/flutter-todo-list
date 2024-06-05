@@ -2,7 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as path;
 
 class DbUtil {
-  static const version = 1;
+  static const version = 2;
   static const dataBaseName = 'todoListApp';
 
   Future<Database> openConnection() async {
@@ -10,6 +10,7 @@ class DbUtil {
     String databaseFinalPath = path.join(dbPath, dataBaseName);
     final database = openDatabase(
       databaseFinalPath,
+      version: version,
       onCreate: (db, version) {
         db.execute('''
   CREATE TABLE todo(

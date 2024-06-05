@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist_app_v2/firebase_options.dart';
 import 'package:todolist_app_v2/models/auth.dart';
+import 'package:todolist_app_v2/pages/create_task.dart';
 import 'package:todolist_app_v2/pages/home_page.dart';
 import 'package:todolist_app_v2/pages/login_page.dart';
 import 'package:todolist_app_v2/pages/register_page.dart';
@@ -24,11 +26,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => Auth(FirebaseAuth.instance),)
+        ChangeNotifierProvider(
+          create: (context) => Auth(FirebaseAuth.instance),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'TodoList App',
+        // localizationsDelegates: const [
+        //   GlobalMaterialLocalizations.delegate,
+        //   GlobalWidgetsLocalizations.delegate,
+        // ],
+        // supportedLocales: const [
+        //   Locale('pt', 'BR'),
+        // ],
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
@@ -40,6 +51,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.loginPage: (context) => const LoginPage(),
           AppRoutes.registerPage: (context) => const RegisterPage(),
           AppRoutes.homePage: (context) => const HomePage(),
+          AppRoutes.createTask: (context) => const CreateTask(),
         },
       ),
     );

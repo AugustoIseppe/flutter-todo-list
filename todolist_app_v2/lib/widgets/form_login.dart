@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class FormLogin extends StatelessWidget {
+class Formulario extends StatelessWidget {
   final FocusNode? focusNode;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final String? labelText;
   final bool? obscureText;
 
-  const FormLogin({
+  const Formulario({
     super.key,
     this.focusNode,
     required this.controller,

@@ -64,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      FormLogin(
+                      Formulario(
                         controller: _emailRegisterController,
                         labelText: 'Insira um e-mail',
                         validator: Validatorless.multiple([
@@ -75,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      FormLogin(
+                      Formulario(
                         controller: _passwordRegisterController,
                         labelText: 'Informe sua senha',
                         validator: Validatorless.multiple(
@@ -89,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      FormLogin(
+                      Formulario(
                         controller: _confirmPasswordRegisterController,
                         labelText: 'Cofirmar senha',
                         validator: Validatorless.multiple(

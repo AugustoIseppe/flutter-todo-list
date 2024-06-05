@@ -96,18 +96,20 @@ class _LoginPageState extends State<LoginPage> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    FormLogin(
+                    Formulario(
                       controller: _emailController,
                       labelText: 'E-mail',
-                      validator: Validatorless.multiple([
-                        Validatorless.required('E-mail obrigatório'),
-                        Validatorless.email('E-mail inválido')
-                      ]),
+                      validator: Validatorless.multiple(
+                        [
+                          Validatorless.required('E-mail obrigatório'),
+                          Validatorless.email('E-mail inválido')
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    FormLogin(
+                    Formulario(
                       controller: _passwordController,
                       labelText: 'Senha',
                       validator: Validatorless.multiple(
